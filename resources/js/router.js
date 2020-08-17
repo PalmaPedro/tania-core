@@ -96,6 +96,14 @@ const router = new VueRouter({
       component: () => import('./pages/tasks/task.vue'),
     },
 
+    // Devices
+    {
+      path: '/devices',
+      name: 'Device',
+      meta: { requiresAuth: true },
+      component: () => import('./pages/devices/device.vue'),
+    },
+
     // Inventories
     {
       path: '/materials',

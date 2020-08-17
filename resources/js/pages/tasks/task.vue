@@ -29,8 +29,8 @@
               translate All
             option(value="AREA")
               translate Area
-            option(value="RESERVOIR")
-              translate Reservoir
+            //option(value="RESERVOIR")
+              //translate Reservoir
             option(value="CROP")
               translate Crop
             option(value="GENERAL")

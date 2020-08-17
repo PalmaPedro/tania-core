@@ -3,7 +3,7 @@ module github.com/Tanibox/tania-core
 go 1.12
 
 require (
-	github.com/asaskevich/EventBus v0.0.0-20180315140547-d46933a94f05
+	github.com/asaskevich/EventBus v0.0.0-20180315140547-d46933a94f05 // threading
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/kr/pretty v0.1.0 // indirect
