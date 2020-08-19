@@ -7,14 +7,17 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
+// AreaQueryMysql : 
 type AreaQueryMysql struct {
 	DB *sql.DB
 }
 
+// NewAreaQueryMysql :
 func NewAreaQueryMysql(db *sql.DB) query.AreaQuery {
 	return AreaQueryMysql{DB: db}
 }
 
+// FindByID : 
 func (s AreaQueryMysql) FindByID(uid uuid.UUID) <-chan query.QueryResult {
 	result := make(chan query.QueryResult)
 

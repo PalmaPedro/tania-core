@@ -1,7 +1,5 @@
-export const DeviceCategories = [
+export const DeviceDomainCategories = [
     { key: 'ROBOT', label: 'Robot' },
-    { key: 'TEMPERATURE SENSOR', label: 'Temperature Sensor' },
-    { key: 'HUMIDITY SENSOR', label: 'Humidity Sensor' },
-    { key: 'PH SENSOR', label: 'pH Sensor' },
+    { key: 'SENSOR', label: 'Sensor' }
 ]
 

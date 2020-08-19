@@ -18,13 +18,13 @@
           v-on:click.native="homeClickHandler"
         )
 
-        AsideItem(
+        //AsideItem(
           title="Reservoirs"
           fontawesome="fa fa-tint"
           :routeName="{ name: 'FarmReservoirs' }"
           :isActive="reservoirsActive"
           v-on:click.native="reservoirsClickHandler"
-        )
+        //)
 
         AsideItem(
           title="Areas"
@@ -56,6 +56,14 @@
           :routeName="{ name: 'Task' }"
           :isActive="tasksActive"
           v-on:click.native="tasksClickHandler"
+        )
+
+        AsideItem(
+          title="Devices"
+          fontawesome="fas fa-robot"
+          :routeName="{ name: 'Device' }"
+          :isActive="devicesActive"
+          v-on:click.native="devicesClickHandler"
         )
 
         AsideItem(
@@ -93,6 +101,7 @@ export default {
       materialsActive: false,
       cropsActive: false,
       tasksActive: false,
+      devicesActive: false,
       accountActive: false,
     };
   },
@@ -130,6 +139,7 @@ export default {
       this.materialsActive = false;
       this.cropsActive = false;
       this.tasksActive = false;
+      this.devicesActive = false;
       this.accountActive = false;
     },
     reservoirsClickHandler() {
@@ -139,6 +149,7 @@ export default {
       this.materialsActive = false;
       this.cropsActive = false;
       this.tasksActive = false;
+      this.devicesActive = false;
       this.accountActive = false;
     },
     areasClickHandler() {
@@ -148,6 +159,7 @@ export default {
       this.materialsActive = false;
       this.cropsActive = false;
       this.tasksActive = false;
+      this.devicesActive = false;
       this.accountActive = false;
     },
     materialsClickHandler() {
@@ -157,6 +169,7 @@ export default {
       this.materialsActive = true;
       this.cropsActive = false;
       this.tasksActive = false;
+      this.devicesActive = false;
       this.accountActive = false;
     },
     cropsClickHandler() {
@@ -166,6 +179,7 @@ export default {
       this.materialsActive = false;
       this.cropsActive = true;
       this.tasksActive = false;
+      this.devicesActive = false;
       this.accountActive = false;
     },
     tasksClickHandler() {
@@ -175,6 +189,17 @@ export default {
       this.materialsActive = false;
       this.cropsActive = false;
       this.tasksActive = true;
+      this.devicesActive = false;
+      this.accountActive = false;
+    },
+    devicesClickHandler() {
+      this.homeActive = false;
+      this.reservoirsActive = false;
+      this.areasActive = false;
+      this.materialsActive = false;
+      this.cropsActive = false;
+      this.tasksActive = false;
+      this.devicesActive = true;
       this.accountActive = false;
     },
     accountClickHandler() {

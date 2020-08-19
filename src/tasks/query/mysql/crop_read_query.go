@@ -7,14 +7,17 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
+// CropQueryMysql :
 type CropQueryMysql struct {
 	DB *sql.DB
 }
 
+// NewCropQueryMysql :
 func NewCropQueryMysql(db *sql.DB) query.CropQuery {
 	return CropQueryMysql{DB: db}
 }
 
+// FindCropByID :
 func (s CropQueryMysql) FindCropByID(uid uuid.UUID) <-chan query.QueryResult {
 	result := make(chan query.QueryResult)
 

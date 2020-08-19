@@ -12,14 +12,17 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
+// TaskEventQueryMysql :
 type TaskEventQueryMysql struct {
 	DB *sql.DB
 }
 
+// NewTaskEventQueryMysql :
 func NewTaskEventQueryMysql(db *sql.DB) query.TaskEventQuery {
 	return &TaskEventQueryMysql{DB: db}
 }
 
+// FindAllByTaskID :
 func (f *TaskEventQueryMysql) FindAllByTaskID(uid uuid.UUID) <-chan query.QueryResult {
 	result := make(chan query.QueryResult)
 

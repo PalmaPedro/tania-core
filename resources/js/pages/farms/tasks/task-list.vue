@@ -29,7 +29,7 @@
               MoreDetail(:data="task" :description="task.description")
               small.text-muted(v-if="task.due_date") Due date:
                 |
-                | {{ task.due_date | moment('timezone', 'Asia/Jakarta').format('DD/MM/YYYY') }}
+                | {{ task.due_date | moment('timezone', 'Europe/Copenhagen').format('DD/MM/YYYY') }}
                 TaskLabel(:type="'PRIORITY'" :task="task")
                 span.text-danger(v-if="task.is_due == true")
                   translate Overdue!
@@ -107,7 +107,7 @@
               div
                 small.text-muted Due date:
                   |
-                  | {{ task.due_date | moment('timezone', 'Asia/Jakarta').format('DD/MM/YYYY') }}
+                  | {{ task.due_date | moment('timezone', 'Europe/Copenhagen').format('DD/MM/YYYY') }}
                 .status.status-urgent(v-if="task.priority == 'URGENT'")
                   translate URGENT
                 span.text-danger(v-if="task.is_due == true")
@@ -193,7 +193,7 @@ export default {
       return (status === 'COMPLETED');
     },
     isToday(date) {
-      return moment(date).tz('Asia/Jakarta').isSame(moment(), 'day');
+      return moment(date).tz('Europe/Copenhagen').isSame(moment(), 'day');
     },
     openModal(data) {
       this.data = data;

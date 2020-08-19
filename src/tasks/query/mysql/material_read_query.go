@@ -7,14 +7,17 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
+// MaterialQueryMysql :
 type MaterialQueryMysql struct {
 	DB *sql.DB
 }
 
+// NewMaterialQueryMysql :
 func NewMaterialQueryMysql(db *sql.DB) query.MaterialQuery {
 	return MaterialQueryMysql{DB: db}
 }
 
+// FindMaterialByID :
 func (s MaterialQueryMysql) FindMaterialByID(uid uuid.UUID) <-chan query.QueryResult {
 	result := make(chan query.QueryResult)
 

@@ -7,14 +7,17 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
+// ReservoirQueryMysql :
 type ReservoirQueryMysql struct {
 	DB *sql.DB
 }
 
+// NewReservoirQueryMysql :
 func NewReservoirQueryMysql(db *sql.DB) query.ReservoirQuery {
 	return ReservoirQueryMysql{DB: db}
 }
 
+// FindReservoirByID :
 func (s ReservoirQueryMysql) FindReservoirByID(uid uuid.UUID) <-chan query.QueryResult {
 	result := make(chan query.QueryResult)
 
