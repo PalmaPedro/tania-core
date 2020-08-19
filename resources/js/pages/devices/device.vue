@@ -27,13 +27,13 @@
           select.form-control(:class="{'input': true, 'text-danger': errors.has('category') }" name="category" @change="categoryChange($event.target.value)" v-model="selected_category")
             option(value="")
               translate All
-            option(value="ROBOT")
+            //option(value="ROBOT")
               translate Robot
             //option(value="RESERVOIR")
               //translate Reservoir
-            option(value="SENSOR")
+            //option(value="SENSOR")
               translate Sensor
-            option(v-for="category in options.taskCategories" :value="category.key") {{ category.label }}
+            option(v-for="category in options.deviceCategories" :value="category.key") {{ category.label }}
         
       //.wrapper
         b-list-group
@@ -81,7 +81,7 @@ import Modal from '../../components/modal.vue';
 import TasksList from '../farms/tasks/task-list.vue';
 import TaskForm from '../farms/devices/device-form.vue';
 import CropTaskForm from '../farms/tasks/crop-task-form.vue';
-import { TaskDomainCategories } from '../../stores/helpers/farms/task';
+import { DeviceDomainCategories } from '../../stores/helpers/farms/device';
 import BtnAddNew from '../../components/common/btn-add-new.vue';
 
 export default {
@@ -97,7 +97,7 @@ export default {
     return {
       data: {},
       options: {
-        taskCategories: Array.from(TaskDomainCategories),
+        deviceCategories: Array.from(DeviceDomainCategories),
       },
       selected_category: '',
       selected_priority: '',

@@ -27,9 +27,9 @@
           )
             option(value="")
               translate Please select category
-            option(v-if="asset_name == 'ROBOT'" value="ROBOT")
+            //option(v-if="asset_name == 'ROBOT'" value="ROBOT")
               translate Robot
-            option(v-if="asset_name == 'SENSOR'" value="SENSOR")
+            //option(v-if="asset_name == 'SENSOR'" value="SENSOR")
               translate Sensor
             //option(v-if="asset_name == 'GENERAL'" value="GENERAL")
               translate General
