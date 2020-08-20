@@ -5,7 +5,7 @@
       //modal(v-if="showCropModal" @close="showCropModal = false")
         CropTaskForm(:asset="'Crop'" :data="data")
       modal(v-if="showModal" @close="showModal = false")
-        TaskForm(:asset="'General'" :data="data")
+        DeviceForm(:asset="'General'" :data="data")
 
       h3.title-page
         translate Devices
@@ -78,19 +78,19 @@
 <script>
 import { mapActions } from 'vuex';
 import Modal from '../../components/modal.vue';
-import TasksList from '../farms/tasks/task-list.vue';
-import TaskForm from '../farms/devices/device-form.vue';
+import DevicesList from '../farms/devices/device-list.vue';
+import DeviceForm from '../farms/devices/device-form.vue';
 import CropTaskForm from '../farms/tasks/crop-task-form.vue';
 import { DeviceDomainCategories } from '../../stores/helpers/farms/device';
 import BtnAddNew from '../../components/common/btn-add-new.vue';
 
 export default {
-  name: 'Tasks',
+  name: 'Devices',
   components: {
     CropTaskForm,
     Modal,
-    TaskForm,
-    TasksList,
+    DeviceForm,
+    DevicesList,
     BtnAddNew,
   },
   data() {
@@ -100,10 +100,10 @@ export default {
         deviceCategories: Array.from(DeviceDomainCategories),
       },
       selected_category: '',
-      selected_priority: '',
-      showCropModal: false,
+      //selected_priority: '',
+      //showCropModal: false,
       showModal: false,
-      status: 'INCOMPLETE',
+      //status: 'INCOMPLETE',
     };
   },
   methods: {
