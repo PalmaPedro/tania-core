@@ -79,10 +79,10 @@
             option(v-if="asset_name == 'RESERVOIR'" value="RESERVOIR")
               translate Reservoir
             option(v-if="asset_name == 'GENERAL'" value="GENERAL")
-              translate General
-            option(v-for="category in options.taskCategories" :value="category.key")
+              translate Select_to_test
+            //option(v-for="category in options.taskCategories" :value="category.key")
               | {{ category.label }}
-            option(v-if="asset_name == 'GENERAL'" value="INVENTORY")
+            //option(v-if="asset_name == 'GENERAL'" value="INVENTORY")
               translate Inventory
           span.help-block.text-danger(v-show="errors.has('category')")
             | {{ errors.first('category') }}
