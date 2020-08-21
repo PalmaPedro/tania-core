@@ -5,16 +5,16 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/PalmaPedro/tania-core/src/devices/query"
+	"github.com/PalmaPedro/tania-core/devices/query"
 	uuid "github.com/satori/go.uuid"
 )
-	// DeviceEventQueryMysql :
-	type DeviceEventQueryMysql struct {
-		DB *sql.DB
-	}
+// DeviceEventQueryMysql :
+type DeviceEventQueryMysql struct {
+	DB *sql.DB
+}
 
-	// NewDeviceEventQueryMysql :
-	func NewDeviceEventQueryMysql(db *sql.DB) query.DeviceEventQuery {
-		return &DeviceEventQueryMysql{DB: db}
-	}
+// NewDeviceEventQueryMysql :
+func NewDeviceEventQueryMysql(db *sql.DB) query.DeviceEventQuery {
+	return &DeviceEventQueryMysql{DB: db}
+}
 

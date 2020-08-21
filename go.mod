@@ -1,12 +1,14 @@
-module github.com/Tanibox/tania-core
+module github.com/PalmaPedro/tania-core
 
-go 1.12
+go 1.15
 
 require (
+	github.com/Tanibox/tania-core v0.0.0-20191224162216-c40cf14ec12f
 	github.com/asaskevich/EventBus v0.0.0-20180315140547-d46933a94f05
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/kr/pretty v0.1.0 // indirect
+	github.com/labstack/echo v3.3.10+incompatible // indirect
 	github.com/labstack/echo/v4 v4.0.0
 	github.com/labstack/gommon v0.2.8
 	github.com/mattn/go-colorable v0.1.1
