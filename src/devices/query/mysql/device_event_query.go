@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"time"
 
-
 	"github.com/PalmaPedro/tania-core/src/devices/decoder"
 	"github.com/PalmaPedro/tania-core/src/devices/query"
 	"github.com/PalmaPedro/tania-core/src/devices/storage"
@@ -23,20 +22,20 @@ func NewDeviceEventQueryMysql(db *sql.DB) query.DeviceEventQuery {
 }
 
 // FindAllByDeviceID :
-func (f *DeviceEventQueryMysql) FindAllByDeviceID(uid uuid.UUID) <-chan query.QueryResult {
-	result := make(chan query.QueryResult)
+func (f *DeviceEventQueryMysql) FindAllByDeviceID(uid uuid.UUID) <-chan query.Result {
+	result := make(chan query.Result)
 
 	go func() {
 		events := []storage.DeviceEvent{}
 
 		rows, err := f.DB.Query("SELECT * FROM DEVICE_EVENT WHERE DEVICE_UID = ? ORDER BY VERSION ASC", uid.Bytes())
 		if err != nil {
-			result <- query.QueryResult{Error: err}
+			result <- query.Result{Error: err}
 		}
 
 		rowsData := struct {
 			ID          int
-			TaskUID     []byte
+			DeviceUID     []byte
 			Version     int
 			CreatedDate time.Time
 			Event       []byte
@@ -50,7 +49,7 @@ func (f *DeviceEventQueryMysql) FindAllByDeviceID(uid uuid.UUID) <-chan query.Qu
 
 			deviceUID, err := uuid.FromBytes(rowsData.DeviceUID)
 			if err != nil {
-				result <- query.QueryResult{Error: err}
+				result <- query.Result{Error: err}
 			}
 
 			events = append(events, storage.DeviceEvent{
@@ -61,12 +60,9 @@ func (f *DeviceEventQueryMysql) FindAllByDeviceID(uid uuid.UUID) <-chan query.Qu
 			})
 		}
 
-		result <- query.QueryResult{Result: events}
+		result <- query.Result{Result: events}
 		close(result)
 	}()
 
 	return result
 }
-
-
-

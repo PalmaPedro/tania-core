@@ -10,6 +10,7 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
+// SaveToTaskReadModel is used ...
 func (s *TaskServer) SaveToTaskReadModel(event interface{}) error {
 	taskRead := &storage.TaskRead{}
 
@@ -149,7 +150,6 @@ func (s *TaskServer) getTaskReadFromID(uid uuid.UUID) (*storage.TaskRead, error)
 	}
 	if !ok {
 		return &storage.TaskRead{}, echo.NewHTTPError(http.StatusBadRequest, "Internal server error")
-	} else {
-		return &taskReadFromRepo, nil
-	}
+	} 
+	return &taskReadFromRepo, nil
 }

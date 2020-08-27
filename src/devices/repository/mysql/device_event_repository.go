@@ -1,35 +1,35 @@
-package sqlite
+package repository
 
 import (
 	"database/sql"
 	"encoding/json"
 	"time"
 
-	"github.com/Tanibox/tania-core/src/helper/structhelper"
-	"github.com/Tanibox/tania-core/src/tasks/decoder"
-	"github.com/Tanibox/tania-core/src/tasks/repository"
+	"github.com/PalmaPedro/tania-core/src/helper/structhelper"
+	"github.com/PalmaPedro/tania-core/src/devices/decoder"
+	"github.com/PalmaPedro/tania-core/src/devices/repository"
 	uuid "github.com/satori/go.uuid"
 )
 
-// TaskEventRepositoryMysql is used ...
-type TaskEventRepositoryMysql struct {
+// DeviceEventRepositoryMysql is used ...
+type DeviceEventRepositoryMysql struct {
 	DB *sql.DB
 }
 
-// NewTaskEventRepositoryMysql is used...
-func NewTaskEventRepositoryMysql(s *sql.DB) repository.TaskEventRepository {
-	return &TaskEventRepositoryMysql{DB: s}
+// NewDeviceEventRepositoryMysql is used...
+func NewDeviceEventRepositoryMysql(s *sql.DB) repository.DeviceEventRepository {
+	return &DeviceEventRepositoryMysql{DB: s}
 }
 
 // Save is used ...
-func (s *TaskEventRepositoryMysql) Save(uid uuid.UUID, latestVersion int, events []interface{}) <-chan error {
+func (s *DeviceEventRepositoryMysql) Save(uid uuid.UUID, latestVersion int, events []interface{}) <-chan error {
 	result := make(chan error)
 
 	go func() {
 		for _, v := range events {
 			latestVersion++
 
-			stmt, err := s.DB.Prepare(`INSERT INTO TASK_EVENT
+			stmt, err := s.DB.Prepare(`INSERT INTO DEVICE_EVENT
 				(TASK_UID, VERSION, CREATED_DATE, EVENT)
 				VALUES (?, ?, ?, ?)`)
 

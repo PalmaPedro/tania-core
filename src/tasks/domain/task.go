@@ -98,6 +98,7 @@ func CreateTask(taskService TaskService, title string, description string, dueda
 	return initial, nil
 }
 
+
 func (t *Task) ChangeTaskTitle(taskService TaskService, title string) (*Task, error) {
 	err := validateTaskTitle(title)
 	if err != nil {

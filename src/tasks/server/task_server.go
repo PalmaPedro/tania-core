@@ -145,6 +145,7 @@ func (s *TaskServer) Mount(g *echo.Group) {
 	g.PUT("/:id/due", s.SetTaskAsDue)
 }
 
+// FindAllTasks is used
 func (s TaskServer) FindAllTasks(c echo.Context) error {
 	data := make(map[string]interface{})
 
@@ -190,6 +191,7 @@ func (s TaskServer) FindAllTasks(c echo.Context) error {
 	return c.JSON(http.StatusOK, data)
 }
 
+// FindFilteredTasks is used ...
 func (s TaskServer) FindFilteredTasks(c echo.Context) error {
 	data := make(map[string]interface{})
 
@@ -250,25 +252,25 @@ func (s *TaskServer) SaveTask(c echo.Context) error {
 
 	data := make(map[string]storage.TaskRead)
 
-	form_date := c.FormValue("due_date")
-	due_ptr := (*time.Time)(nil)
-	if len(form_date) != 0 {
-		due_date, err := time.Parse(time.RFC3339Nano, form_date)
+	formDate := c.FormValue("due_date")
+	duePtr := (*time.Time)(nil)
+	if len(formDate) != 0 {
+		dueDate, err := time.Parse(time.RFC3339Nano, formDate)
 
 		if err != nil {
 			return Error(c, err)
 		}
-		due_ptr = &due_date
+		duePtr = &dueDate
 	}
 
-	asset_id := c.FormValue("asset_id")
-	asset_id_ptr := (*uuid.UUID)(nil)
-	if len(asset_id) != 0 {
-		asset_id, err := uuid.FromString(asset_id)
+	assetID := c.FormValue("asset_id")
+	assetIDPtr := (*uuid.UUID)(nil)
+	if len(assetID) != 0 {
+		assetID, err := uuid.FromString(assetID)
 		if err != nil {
 			return Error(c, err)
 		}
-		asset_id_ptr = &asset_id
+		assetIDPtr = &assetID
 	}
 
 	domaincode := c.FormValue("domain")
@@ -283,11 +285,11 @@ func (s *TaskServer) SaveTask(c echo.Context) error {
 		s.TaskService,
 		c.FormValue("title"),
 		c.FormValue("description"),
-		due_ptr,
+		duePtr,
 		c.FormValue("priority"),
 		domaintask,
 		c.FormValue("category"),
-		asset_id_ptr)
+		assetIDPtr)
 
 	if err != nil {
 		return Error(c, err)
@@ -309,10 +311,11 @@ func (s *TaskServer) SaveTask(c echo.Context) error {
 	return c.JSON(http.StatusOK, data)
 }
 
+// CreateTaskDomainByCode is used ...
 func (s *TaskServer) CreateTaskDomainByCode(domaincode string, c echo.Context) (domain.TaskDomain, error) {
 	domainvalue := domaincode
 	if domainvalue == "" {
-		return nil, NewRequestValidationError(REQUIRED, "domain")
+		return nil, NewRequestValidationError(required, "domain")
 	}
 
 	switch domainvalue {
@@ -377,10 +380,11 @@ func (s *TaskServer) CreateTaskDomainByCode(domaincode string, c echo.Context) (
 		}
 		return domain.CreateTaskDomainReservoir(s.TaskService, category, materialPtr)
 	default:
-		return nil, NewRequestValidationError(INVALID_OPTION, "domain")
+		return nil, NewRequestValidationError(invalidOption, "domain")
 	}
 }
 
+// FindTaskByID is used ...
 func (s *TaskServer) FindTaskByID(c echo.Context) error {
 	data := make(map[string]storage.TaskRead)
 	uid, err := uuid.FromString(c.Param("id"))
@@ -396,7 +400,7 @@ func (s *TaskServer) FindTaskByID(c echo.Context) error {
 	task, ok := result.Result.(storage.TaskRead)
 
 	if task.UID != uid {
-		return Error(c, NewRequestValidationError(NOT_FOUND, "id"))
+		return Error(c, NewRequestValidationError(notFound, "id"))
 	}
 	if !ok {
 		return echo.NewHTTPError(http.StatusBadRequest, "Internal server error")
@@ -408,6 +412,7 @@ func (s *TaskServer) FindTaskByID(c echo.Context) error {
 	return c.JSON(http.StatusOK, data)
 }
 
+// AppendTaskDomainDetails is used ...
 func (s *TaskServer) AppendTaskDomainDetails(task *storage.TaskRead) error {
 
 	switch task.Domain {
@@ -501,6 +506,7 @@ func (s *TaskServer) AppendTaskDomainDetails(task *storage.TaskRead) error {
 	return nil
 }
 
+// UpdateTask is used ...
 func (s *TaskServer) UpdateTask(c echo.Context) error {
 
 	data := make(map[string]storage.TaskRead)
@@ -515,7 +521,7 @@ func (s *TaskServer) UpdateTask(c echo.Context) error {
 	taskRead, ok := readResult.Result.(storage.TaskRead)
 
 	if taskRead.UID != uid {
-		return Error(c, NewRequestValidationError(NOT_FOUND, "id"))
+		return Error(c, NewRequestValidationError(notFound, "id"))
 	}
 	if !ok {
 		return echo.NewHTTPError(http.StatusBadRequest, "Internal server error")
@@ -565,17 +571,17 @@ func (s *TaskServer) updateTaskAttributes(taskService domain.TaskService, task *
 	}
 
 	// Change Task Due Date
-	form_date := c.FormValue("due_date")
-	due_ptr := (*time.Time)(nil)
-	if len(form_date) != 0 {
+	formDate := c.FormValue("due_date")
+	duePtr := (*time.Time)(nil)
+	if len(formDate) != 0 {
 
-		due_date, err := time.Parse(time.RFC3339Nano, form_date)
+		dueDate, err := time.Parse(time.RFC3339Nano, formDate)
 
 		if err != nil {
 			return task, Error(c, err)
 		}
-		due_ptr = &due_date
-		task.ChangeTaskDueDate(s.TaskService, due_ptr)
+		duePtr = &dueDate
+		task.ChangeTaskDueDate(s.TaskService, duePtr)
 	}
 
 	// Change Task Priority
@@ -599,6 +605,7 @@ func (s *TaskServer) updateTaskAttributes(taskService domain.TaskService, task *
 	return task, nil
 }
 
+// CancelTask is used ...
 func (s *TaskServer) CancelTask(c echo.Context) error {
 
 	data := make(map[string]storage.TaskRead)
@@ -613,7 +620,7 @@ func (s *TaskServer) CancelTask(c echo.Context) error {
 	taskRead, ok := readResult.Result.(storage.TaskRead)
 
 	if taskRead.UID != uid {
-		return Error(c, NewRequestValidationError(NOT_FOUND, "id"))
+		return Error(c, NewRequestValidationError(notFound, "id"))
 	}
 	if !ok {
 		return echo.NewHTTPError(http.StatusBadRequest, "Internal server error")
@@ -651,6 +658,7 @@ func (s *TaskServer) CancelTask(c echo.Context) error {
 	return c.JSON(http.StatusOK, data)
 }
 
+// CompleteTask is used ...
 func (s *TaskServer) CompleteTask(c echo.Context) error {
 
 	data := make(map[string]storage.TaskRead)
@@ -665,7 +673,7 @@ func (s *TaskServer) CompleteTask(c echo.Context) error {
 	taskRead, ok := readResult.Result.(storage.TaskRead)
 
 	if taskRead.UID != uid {
-		return Error(c, NewRequestValidationError(NOT_FOUND, "id"))
+		return Error(c, NewRequestValidationError(notFound, "id"))
 	}
 	if !ok {
 		return echo.NewHTTPError(http.StatusBadRequest, "Internal server error")
@@ -709,6 +717,7 @@ func (s *TaskServer) CompleteTask(c echo.Context) error {
 	return c.JSON(http.StatusOK, data)
 }
 
+// SetTaskAsDue is used ...
 func (s *TaskServer) SetTaskAsDue(c echo.Context) error {
 
 	data := make(map[string]storage.TaskRead)
@@ -723,7 +732,7 @@ func (s *TaskServer) SetTaskAsDue(c echo.Context) error {
 	taskRead, ok := readResult.Result.(storage.TaskRead)
 
 	if taskRead.UID != uid {
-		return Error(c, NewRequestValidationError(NOT_FOUND, "id"))
+		return Error(c, NewRequestValidationError(notFound, "id"))
 	}
 	if !ok {
 		return echo.NewHTTPError(http.StatusBadRequest, "Internal server error")

@@ -41,6 +41,7 @@ export default {
   ApiDeleteReservoirNotes: (reservoirid, noteid, payload, cbSuccess, cbError) => {
     http.delete('farms/reservoirs/' + reservoirid + '/notes/' + noteid, payload, cbSuccess, cbError)
   },
+  // Areas 
   ApiCreateArea: (farmid, payload, cbSuccess, cbError) => {
     http.post('farms/' + farmid + '/areas', payload, cbSuccess, cbError, {
       'Content-Type': 'multipart/form-data'
@@ -116,6 +117,8 @@ export default {
   ApiUpdateMaterial: (materialid, payload, cbSuccess, cbError) => {
     http.put('farms/inventories/materials/' + payload.type + '/' + materialid, payload, cbSuccess, cbError)
   },
+
+  // Tasks
   ApiCreateTask: (payload, cbSuccess, cbError) => {
     http.post('tasks', payload, cbSuccess, cbError)
   },
@@ -124,12 +127,6 @@ export default {
   },
   ApiFetchTask: (pageid, cbSuccess, cbError) => {
     http.get('tasks?page=' + pageid, cbSuccess, cbError)
-  },
-  ApiFetchActivity: (cropid, cbSuccess, cbError) => {
-    http.get('farms/crops/'+ cropid +'/activities', cbSuccess, cbError)
-  },
-  ApiFetchCropInformation: (farmid, cbSuccess, cbError) => {
-    http.get('farms/'+ farmid +'/crops/information', cbSuccess, cbError)
   },
   ApiFindTasksByDomainAndAssetId: (pageid, domain, assetid, cbSuccess, cbError) => {
     http.get('tasks/search?page=' + pageid + '&domain='+ domain +'&asset_id=' + assetid, cbSuccess, cbError)
@@ -143,4 +140,21 @@ export default {
   ApiSetTaskCompleted: (taskid, cbSuccess, cbError) => {
     http.put('tasks/' + taskid + '/complete', {}, cbSuccess, cbError)
   },
+
+  // Devices
+  ApiCreateDevice: (payload, cbSuccess, cbError) => {
+    http.post('devices', payload, cbSuccess, cbError)
+  },
+  ApiUpdateDevice: (deviceid, payload, cbSuccess, cbError) => {
+    http.put('devices/' + deviceid, payload, cbSuccess, cbError)
+  },
+  ApiFetchDevice: (pageid, cbSuccess, cbError) => {
+    http.get('devices?page=' + pageid, cbSuccess, cbError)
+  },
+  ApiFetchActivity: (cropid, cbSuccess, cbError) => {
+    http.get('farms/crops/'+ cropid +'/activities', cbSuccess, cbError)
+  },
+  ApiFetchCropInformation: (farmid, cbSuccess, cbError) => {
+    http.get('farms/'+ farmid +'/crops/information', cbSuccess, cbError)
+  }
 }

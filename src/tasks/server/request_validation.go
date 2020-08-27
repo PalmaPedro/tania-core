@@ -13,14 +13,14 @@ import (
 )
 
 const (
-	REQUIRED       = "REQUIRED"
-	ALPHANUMERIC   = "ALPHANUMERIC"
-	ALPHA          = "ALPHA"
-	NUMERIC        = "NUMERIC"
-	FLOAT          = "FLOAT"
-	PARSE_FAILED   = "PARSE_FAILED"
-	INVALID_OPTION = "INVALID_OPTION"
-	NOT_FOUND      = "NOT_FOUND"
+	required       = "REQUIRED"
+	alphanumeric   = "ALPHANUMERIC"
+	alpha          = "ALPHA"
+	numeric        = "NUMERIC"
+	float          = "FLOAT"
+	parseFailed   = "PARSE_FAILED"
+	invalidOption = "INVALID_OPTION"
+	notFound     = "NOT_FOUND"
 )
 
 // RequestValidation sanitizes request inputs and convert the input to its correct data type.
@@ -50,21 +50,21 @@ func (rve RequestValidationError) Error() string {
 // Message translates error code to meaningful message
 func Message(errorCode string) string {
 	switch errorCode {
-	case REQUIRED:
+	case required:
 		return "This field is required"
-	case ALPHANUMERIC:
+	case alphanumeric:
 		return "Alphanumeric only"
-	case ALPHA:
+	case alpha:
 		return "Alphabet only"
-	case NUMERIC:
+	case numeric:
 		return "Number only"
-	case FLOAT:
+	case float:
 		return "Float only"
-	case PARSE_FAILED:
+	case parseFailed:
 		return "Parsing failed. Make sure the input is correct."
-	case INVALID_OPTION:
+	case invalidOption:
 		return "This value is not available in options. Please give the correct options."
-	case NOT_FOUND:
+	case notFound:
 		return "Data not found."
 	default:
 		return "Internal server error"

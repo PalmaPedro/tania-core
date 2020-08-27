@@ -23,7 +23,6 @@ import (
 	locationserver "github.com/Tanibox/tania-core/src/location/server"
 	tasksserver "github.com/Tanibox/tania-core/src/tasks/server"
 	taskstorage "github.com/Tanibox/tania-core/src/tasks/storage"
-	//devicesserver "github.com/Tanibox/tania-core/src/devices/server"
 	userserver "github.com/Tanibox/tania-core/src/user/server"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo/v4"
@@ -162,9 +161,6 @@ func main() {
 	taskGroup := API.Group("/tasks", APIMiddlewares...)
 	taskServer.Mount(taskGroup)
 
-	//deviceGroup := API.Group("/devices", APIMiddlewares...)
-	//deviceServer.Mount(deviceGroup)
-
 	userGroup := API.Group("/user", APIMiddlewares...)
 	userServer.Mount(userGroup)
 
@@ -199,7 +195,7 @@ func headerNoCache(next echo.HandlerFunc) echo.HandlerFunc {
 		return next(c)
 	}
 }
-// InMemory is a function ...
+// InMemory is used ...
 type InMemory struct {
 	farmEventStorage      *assetsstorage.FarmEventStorage
 	farmReadStorage       *assetsstorage.FarmReadStorage

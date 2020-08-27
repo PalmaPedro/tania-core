@@ -5,6 +5,7 @@ import (
 	"github.com/Tanibox/tania-core/src/tasks/storage"
 )
 
+// MapTaskToTaskRead is used ...
 func MapTaskToTaskRead(task *domain.Task) *storage.TaskRead {
 	taskRead := &storage.TaskRead{
 		Title:         task.Title,
