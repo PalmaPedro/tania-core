@@ -45,9 +45,9 @@ const actions = {
       NProgress.start()
       return new Promise((resolve, reject) => {
         let query = '&'
-        if (payload.status == 'COMPLETED') {
+        if (payload.status == 'OFF') {
           query += 'status=COMPLETED'
-        } /*else if (payload.status == 'THISWEEK') {
+        }/* else if (payload.status == 'THISWEEK') {
           let due_start = moment().startOf('week').format('YYYY-MM-DD')
           let due_end = moment().endOf('week').format('YYYY-MM-DD')
           query += 'due_start=' + due_start +'&due_end=' + due_end
@@ -60,8 +60,8 @@ const actions = {
         } else if (payload.status == 'TODAY') {
           let due = moment().format('YYYY-MM-DD')
           query += 'due_date=' + due
-        } */else {
-          query += 'status=CREATED'
+        }*/ else {
+          query += 'status=ON'
         }
         FarmApi
           .ApiFindDevicesByCategoryAndPriorityAndStatus(payload.pageId, payload.category, payload.priority, query, ({ data }) => {

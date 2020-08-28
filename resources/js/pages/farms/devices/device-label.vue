@@ -1,6 +1,6 @@
 <template lang="pug">
     span
-      span(v-if="type == 'TYPE'")
+      span(v-if="type == 'CATEGORY'")
         span.label.label-robot(v-if="device.category == 'ROBOT'")
           translate ROBOT
         span.label.label-temperature-sensor(v-if="device.category == 'SENSOR'")

@@ -151,10 +151,14 @@ export default {
   ApiFetchDevice: (pageid, cbSuccess, cbError) => {
     http.get('devices?page=' + pageid, cbSuccess, cbError)
   },
+  ApiFindDevicesByCategoryAndPriorityAndStatus: (pageid, category, priority, status, cbSuccess, cbError) => {
+    http.get('devices/search?page=' + pageid + '&category='+ category +'&priority=' + priority + status, cbSuccess, cbError)
+  },
   ApiFetchActivity: (cropid, cbSuccess, cbError) => {
     http.get('farms/crops/'+ cropid +'/activities', cbSuccess, cbError)
   },
   ApiFetchCropInformation: (farmid, cbSuccess, cbError) => {
     http.get('farms/'+ farmid +'/crops/information', cbSuccess, cbError)
   }
+  
 }
