@@ -15,7 +15,7 @@
       BtnAddNew(:title="$gettext('Add Device')" v-on:click.native="openModal()")
 
       .cards-wrapper
-        TasksList(:category="selected_category" :priority="selected_priority" :status="status" @openModal="openModal")
+        DevicesList(:category="selected_category" :priority="selected_priority" :status="status" @openModal="openModal")
 
     .col-xs-12.col-sm-12.col-md-4.col-lg-3
       b-form
@@ -87,7 +87,7 @@ import BtnAddNew from '../../components/common/btn-add-new.vue';
 export default {
   name: 'Devices',
   components: {
-    CropTaskForm,
+    //CropTaskForm,
     Modal,
     DeviceForm,
     DevicesList,
@@ -100,10 +100,10 @@ export default {
         deviceCategories: Array.from(DeviceDomainCategories),
       },
       selected_category: '',
-      //selected_priority: '',
-      //showCropModal: false,
+      selected_priority: '',
+      showCropModal: false,
       showModal: false,
-      //status: 'INCOMPLETE',
+      status: 'INCOMPLETE',
     };
   },
   methods: {

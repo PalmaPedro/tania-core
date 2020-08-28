@@ -1,7 +1,7 @@
 <template lang="pug">
-  .tasks-form
+  .devices-form
     .modal-header
-      h4.font-bold(v-if="task.uid")
+      h4.font-bold(v-if="device.uid")
         translate Update Device
       h4.font-bold(v-else-if="asset != 'General'")
         | {{ asset }}:
@@ -22,7 +22,7 @@
           select.form-control#category(
             v-validate="'required'"
             :class="{'input': true, 'text-danger': errors.has('category') }"
-            v-model="task.category"
+            v-model="device.category"
             name="category"
           )
             option(value="")
@@ -46,7 +46,7 @@
             type="text"
             v-validate="'required|max:100'"
             :class="{'input': true, 'text-danger': errors.has('title') }"
-            v-model="task.title"
+            v-model="device.title"
             name="title"
           )
           span.help-block.text-danger(v-show="errors.has('title')") {{ errors.first('title') }}
@@ -56,7 +56,7 @@
           textarea.form-control#description(
             type="text"
             :class="{'input': true, 'text-danger': errors.has('description') }"
-            v-model="task.description"
+            v-model="device.description"
             name="description"
             rows="3"
           )
@@ -70,7 +70,7 @@
 <script>
 import { mapActions } from 'vuex';
 //import Datepicker from 'vuejs-datepicker';
-import { StubTask } from '../../../stores/stubs';
+import { StubDevice } from '../../../stores/stubs';
 import { DeviceDomainCategories } from '../../../stores/helpers/farms/device';
 import BtnCancel from '../../../components/common/btn-cancel.vue';
 import BtnSave from '../../../components/common/btn-save.vue';
@@ -94,7 +94,7 @@ export default {
   },
   data() {
     return {
-      task: Object.assign({}, StubTask),
+      device: Object.assign({}, StubDevice),
       asset_name: '',
       options: {
         deviceCategories: Array.from(DeviceDomainCategories),
@@ -105,7 +105,7 @@ export default {
     if (typeof this.data.domain !== 'undefined') {
       this.device.uid = this.data.uid;
       //this.task.due_date = this.data.due_date;
-      //this.task.priority = this.data.priority;
+      this.device.priority = this.data.priority;
       this.device.category = this.data.category;
       this.device.title = this.data.title;
       this.device.description = this.data.description;
