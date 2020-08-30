@@ -133,7 +133,6 @@ func (s *TaskServer) InitSubscriber() {
 // Mount defines the TaskServer's endpoints with its handlers
 func (s *TaskServer) Mount(g *echo.Group) {
 	g.POST("", s.SaveTask)
-
 	g.GET("", s.FindAllTasks)
 	g.GET("/search", s.FindFilteredTasks)
 	g.GET("/:id", s.FindTaskByID)

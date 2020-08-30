@@ -22,6 +22,8 @@ import (
 	growthstorage "github.com/Tanibox/tania-core/src/growth/storage"
 	locationserver "github.com/Tanibox/tania-core/src/location/server"
 	tasksserver "github.com/Tanibox/tania-core/src/tasks/server"
+	devicesserver "github.com/PalmaPedro/tania-core/src/devices/server"
+	devicestorage "github.com/PalmaPedro/tania-core/src/devices/storage"
 	taskstorage "github.com/Tanibox/tania-core/src/tasks/storage"
 	userserver "github.com/Tanibox/tania-core/src/user/server"
 	_ "github.com/go-sql-driver/mysql"
@@ -99,6 +101,21 @@ func main() {
 		e.Logger.Fatal(err)
 	}
 
+
+	deviceServer, err := devicesserver.NewDeviceServer(
+		db,
+		bus,
+		inMem.cropReadStorage,
+		inMem.areaReadStorage,
+		inMem.materialReadStorage,
+		//inMem.reservoirReadStorage,
+		inMem.deviceEventStorage,
+		inMem.deviceReadStorage,
+	)
+	if err != nil {
+		e.Logger.Fatal(err)
+	}
+
 	growthServer, err := growthserver.NewGrowthServer(
 		db,
 		bus,
@@ -161,6 +178,9 @@ func main() {
 	taskGroup := API.Group("/tasks", APIMiddlewares...)
 	taskServer.Mount(taskGroup)
 
+	deviceGroup := API.Group("/devices", APIMiddlewares...)
+	deviceServer.Mount(deviceGroup)
+
 	userGroup := API.Group("/user", APIMiddlewares...)
 	userServer.Mount(userGroup)
 
@@ -210,6 +230,8 @@ type InMemory struct {
 	cropActivityStorage   *growthstorage.CropActivityStorage
 	taskEventStorage      *taskstorage.TaskEventStorage
 	taskReadStorage       *taskstorage.TaskReadStorage
+	deviceEventStorage    *devicestorage.DeviceEventStorage
+	deviceReadStorage     *devicestorage.DeviceReadStorage
 }
 
 func initInMemory() *InMemory {
@@ -232,6 +254,9 @@ func initInMemory() *InMemory {
 
 		taskEventStorage: taskstorage.CreateTaskEventStorage(),
 		taskReadStorage:  taskstorage.CreateTaskReadStorage(),
+
+		deviceEventStorage: devicestorage.CreateDeviceEventStorage(),
+		deviceReadStorage:  devicestorage.CreateDeviceReadStorage(),
 	}
 }
 

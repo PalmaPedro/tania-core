@@ -42,7 +42,7 @@ type Device struct {
 }
 
 // CreateDevice is a function that will add a new device to the system
-func CreateDevice(deviceService DeviceService, title string, description string, priority string, devicedomain DeviceDomain, devicecategory string, assetid *uuid.UUID) (*Device, error) {
+func CreateDevice(deviceService DeviceService, title string, description string,  duedate *time.Time, devicedomain DeviceDomain, devicecategory string, assetid *uuid.UUID) (*Device, error) {
 	// add validation
 
 	err := validateDeviceTitle(title)

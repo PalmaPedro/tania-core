@@ -30,7 +30,7 @@ func (s *DeviceEventRepositoryMysql) Save(uid uuid.UUID, latestVersion int, even
 			latestVersion++
 
 			stmt, err := s.DB.Prepare(`INSERT INTO DEVICE_EVENT
-				(TASK_UID, VERSION, CREATED_DATE, EVENT)
+				(DEVICE_UID, VERSION, CREATED_DATE, EVENT)
 				VALUES (?, ?, ?, ?)`)
 
 			if err != nil {

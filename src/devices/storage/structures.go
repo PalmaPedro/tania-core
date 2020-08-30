@@ -33,56 +33,63 @@ type DeviceRead struct {
 	AssetID       *uuid.UUID        `json:"asset_id"`
 }
 
-/*
-// Implements DeviceDomainDetailedCrop interface in domain
+
+// DeviceDomainDetailedCrop interface in domain
 // But contains more detailed information of material, area and crop
 type DeviceDomainDetailedCrop struct {
-	Material *TaskDomainCropMaterial `json:"material"`
-	Area     *TaskDomainCropArea     `json:"area"`
-	Crop     *TaskDomainCropBatch    `json:"crop"`
-}*/
+	Material *DeviceDomainCropMaterial `json:"material"`
+	Area     *DeviceDomainCropArea     `json:"area"`
+	Crop     *DeviceDomainCropBatch    `json:"crop"`
+}
 
-/*
-type TaskDomainCropArea struct {
+
+// DeviceDomainCropArea is used ...
+type DeviceDomainCropArea struct {
 	AreaID   *uuid.UUID `json:"area_id"`
 	AreaName string     `json:"area_name"`
 }
 
-type TaskDomainCropBatch struct {
+// DeviceDomainCropBatch is used...
+type DeviceDomainCropBatch struct {
 	CropID      *uuid.UUID `json:"crop_id"`
 	CropBatchID string     `json:"crop_batch_id"`
 }
 
-type TaskDomainCropMaterial struct {
+// DeviceDomainCropMaterial is used ...
+type DeviceDomainCropMaterial struct {
 	MaterialID           *uuid.UUID `json:"material_id"`
 	MaterialName         string     `json:"material_name"`
 	MaterialType         string     `json:"material_type"`
 	MaterialDetailedType string     `json:"material_detailed_type"`
 }
 
-func (d TaskDomainDetailedCrop) Code() string {
-	return domain.TaskDomainCropCode
+// Code is used ...
+func (d DeviceDomainDetailedCrop) Code() string {
+	return domain.DeviceDomainCropCode
 }
 
-type TaskDomainDetailedArea struct {
+// DeviceDomainDetailedArea is used ...
+type DeviceDomainDetailedArea struct {
 	MaterialID           *uuid.UUID `json:"material_id"`
 	MaterialName         string     `json:"material_name"`
 	MaterialType         string     `json:"material_type"`
 	MaterialDetailedType string     `json:"material_detailed_type"`
 }
 
-func (d TaskDomainDetailedArea) Code() string {
-	return domain.TaskDomainCropCode
+// Code is used ...
+func (d DeviceDomainDetailedArea) Code() string {
+	return domain.DeviceDomainCropCode
 }
 
-type TaskDomainDetailedReservoir struct {
+// DeviceDomainDetailedReservoir is used ...
+type DeviceDomainDetailedReservoir struct {
 	MaterialID           *uuid.UUID `json:"material_id"`
 	MaterialName         string     `json:"material_name"`
 	MaterialType         string     `json:"material_type"`
 	MaterialDetailedType string     `json:"material_detailed_type"`
 }
 
-func (d TaskDomainDetailedReservoir) Code() string {
-	return domain.TaskDomainCropCode
+// Code is used ...
+func (d DeviceDomainDetailedReservoir) Code() string {
+	return domain.DeviceDomainCropCode
 }
-*/

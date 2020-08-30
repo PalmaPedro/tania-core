@@ -11,7 +11,7 @@ type DeviceServiceSqLLite struct {
 	CropQuery      query.CropQuery
 	AreaQuery      query.AreaQuery
 	MaterialQuery  query.MaterialQuery
-	//ReservoirQuery query.ReservoirQuery
+	ReservoirQuery query.ReservoirQuery
 }
 
 // FindAreaByID used to query the database and return a result if any
@@ -98,8 +98,7 @@ func (s DeviceServiceSqLLite) FindMaterialByID(uid uuid.UUID) domain.ServiceResu
 	}
 }
 
-
-/*
+// FindReservoirByID is used ...
 func (s DeviceServiceSqLLite) FindReservoirByID(uid uuid.UUID) domain.ServiceResult {
 	result := <-s.ReservoirQuery.FindReservoirByID(uid)
 
@@ -125,4 +124,4 @@ func (s DeviceServiceSqLLite) FindReservoirByID(uid uuid.UUID) domain.ServiceRes
 	return domain.ServiceResult{
 		Result: reservoir,
 	}
-}*/
+}

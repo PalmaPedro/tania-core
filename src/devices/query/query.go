@@ -53,10 +53,10 @@ type DeviceQuery interface {
 	FindDeviceByID(deviceUID uuid.UUID) <-chan Result
 }
 
-/*
+// ReservoirQuery is used ...
 type ReservoirQuery interface {
-	FindReservoirByID(reservoirUID uuid.UUID) <-chan QueryResult
-}*/
+	FindReservoirByID(reservoirUID uuid.UUID) <-chan Result
+}
 
 /*
 TODO
@@ -93,8 +93,8 @@ type DeviceMaterialQueryResult struct {
 	Name             string    `json:"name"`
 }
 
-/*
-type TaskReservoirQueryResult struct {
+// DeviceReservoirQueryResult is used
+type DeviceReservoirQueryResult struct {
 	UID  uuid.UUID `json:"uid"`
 	Name string    `json:"name"`
-}*/
+}

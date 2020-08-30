@@ -80,7 +80,7 @@ import { mapActions } from 'vuex';
 import Modal from '../../components/modal.vue';
 import DevicesList from '../farms/devices/device-list.vue';
 import DeviceForm from '../farms/devices/device-form.vue';
-import CropTaskForm from '../farms/tasks/crop-task-form.vue';
+//import CropTaskForm from '../farms/tasks/crop-task-form.vue';
 import { DeviceDomainCategories } from '../../stores/helpers/farms/device';
 import BtnAddNew from '../../components/common/btn-add-new.vue';
 

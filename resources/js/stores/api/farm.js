@@ -41,6 +41,7 @@ export default {
   ApiDeleteReservoirNotes: (reservoirid, noteid, payload, cbSuccess, cbError) => {
     http.delete('farms/reservoirs/' + reservoirid + '/notes/' + noteid, payload, cbSuccess, cbError)
   },
+  
   // Areas 
   ApiCreateArea: (farmid, payload, cbSuccess, cbError) => {
     http.post('farms/' + farmid + '/areas', payload, cbSuccess, cbError, {
@@ -64,6 +65,8 @@ export default {
   ApiDeleteAreaNotes: (areaid, noteid, payload, cbSuccess, cbError) => {
     http.delete('farms/areas/' + areaid + '/notes/' + noteid, payload, cbSuccess, cbError)
   },
+
+  // Crops
   ApiCreateCrop: (areaid, payload, cbSuccess, cbError) => {
     http.post('farms/areas/' + areaid + '/crops' , payload, cbSuccess, cbError)
   },
@@ -105,6 +108,14 @@ export default {
   ApiDeleteCropNotes: (cropid, noteid, payload, cbSuccess, cbError) => {
     http.delete('farms/crops/' + cropid + '/notes/' + noteid, payload, cbSuccess, cbError)
   },
+  ApiFetchActivity: (cropid, cbSuccess, cbError) => {
+    http.get('farms/crops/'+ cropid +'/activities', cbSuccess, cbError)
+  },
+  ApiFetchCropInformation: (farmid, cbSuccess, cbError) => {
+    http.get('farms/'+ farmid +'/crops/information', cbSuccess, cbError)
+  },
+
+  // Materials
   ApiFetchMaterial: (pageid, cbSuccess, cbError) => {
     http.get('farms/inventories/materials?page=' + pageid, cbSuccess, cbError)
   },
@@ -154,11 +165,5 @@ export default {
   ApiFindDevicesByCategoryAndPriorityAndStatus: (pageid, category, priority, status, cbSuccess, cbError) => {
     http.get('devices/search?page=' + pageid + '&category='+ category +'&priority=' + priority + status, cbSuccess, cbError)
   },
-  ApiFetchActivity: (cropid, cbSuccess, cbError) => {
-    http.get('farms/crops/'+ cropid +'/activities', cbSuccess, cbError)
-  },
-  ApiFetchCropInformation: (farmid, cbSuccess, cbError) => {
-    http.get('farms/'+ farmid +'/crops/information', cbSuccess, cbError)
-  }
-  
+
 }
