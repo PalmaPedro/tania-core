@@ -3,7 +3,7 @@ package server
 import (
 	"database/sql"
 	"net/http"
-	"time"
+	//"time"
 
 	"github.com/Tanibox/tania-core/config"
 	"github.com/Tanibox/tania-core/src/eventbus"
@@ -40,7 +40,6 @@ func NewDeviceServer(
 	cropStorage *cropstorage.CropReadStorage,
 	areaStorage *assetsstorage.AreaReadStorage,
 	materialStorage *assetsstorage.MaterialReadStorage,
-	//reservoirStorage *assetsstorage.ReservoirReadStorage,
 	deviceEventStorage *storage.DeviceEventStorage,
 	deviceReadStorage *storage.DeviceReadStorage) (*DeviceServer, error) {
 
@@ -59,13 +58,11 @@ func NewDeviceServer(
 		cropQuery := queryInMem.NewCropQueryInMemory(cropStorage)
 		areaQuery := queryInMem.NewAreaQueryInMemory(areaStorage)
 		materialReadQuery := queryInMem.NewMaterialQueryInMemory(materialStorage)
-		//reservoirQuery := queryInMem.NewReservoirQueryInMemory(reservoirStorage)
 
 		deviceServer.DeviceService = service.DeviceServiceSqLLite{
 			CropQuery:      cropQuery,
 			AreaQuery:      areaQuery,
 			MaterialQuery:  materialReadQuery,
-			//ReservoirQuery: reservoirQuery,
 		}
 
 	case config.DB_MYSQL:
@@ -78,13 +75,11 @@ func NewDeviceServer(
 		cropQuery := queryMysql.NewCropQueryMysql(db)
 		areaQuery := queryMysql.NewAreaQueryMysql(db)
 		materialReadQuery := queryMysql.NewMaterialQueryMysql(db)
-		//reservoirQuery := queryMysql.NewReservoirQueryMysql(db)
 
 		deviceServer.DeviceService = service.DeviceServiceSqLLite{
 			CropQuery:      cropQuery,
 			AreaQuery:      areaQuery,
 			MaterialQuery:  materialReadQuery,
-			//ReservoirQuery: reservoirQuery,
 		}
 
 	}
@@ -114,7 +109,7 @@ func (s *DeviceServer) SaveDevice(c echo.Context) error {
 
 	data := make(map[string]storage.DeviceRead)
 
-	formDate := c.FormValue("due_date")
+	/*formDate := c.FormValue("due_date")
 	duePtr := (*time.Time)(nil)
 	if len(formDate) != 0 {
 		dueDate, err := time.Parse(time.RFC3339Nano, formDate)
@@ -123,7 +118,7 @@ func (s *DeviceServer) SaveDevice(c echo.Context) error {
 			return Error(c, err)
 		}
 		duePtr = &dueDate
-	}
+	}*/
 
 	assetID := c.FormValue("asset_id")
 	assetIDPtr := (*uuid.UUID)(nil)
@@ -147,7 +142,7 @@ func (s *DeviceServer) SaveDevice(c echo.Context) error {
 		s.DeviceService,
 		c.FormValue("title"),
 		c.FormValue("description"),
-		duePtr,
+		//duePtr,
 		//c.FormValue("priority"),
 		domaindevice,
 		c.FormValue("category"),

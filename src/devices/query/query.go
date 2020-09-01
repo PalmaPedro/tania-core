@@ -43,7 +43,7 @@ type DeviceEventQuery interface {
 type DeviceReadQuery interface {
 	FindAll(page, limit int) <-chan Result
 	FindByID(taskUID uuid.UUID) <-chan Result
-	FindDevicesWithFilter(params map[string]string, page, limit int) <-chan Result
+	//FindDevicesWithFilter(params map[string]string, page, limit int) <-chan Result
   CountAll() <-chan Result
   CountDevicesWithFilter(params map[string]string) <-chan Result
 }

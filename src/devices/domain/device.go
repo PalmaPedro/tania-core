@@ -19,7 +19,7 @@ type ServiceResult struct {
 	Error  error
 }
 
-// Device is used
+// Device object is defined here
 type Device struct {
 	UID           uuid.UUID  `json:"uid"`
 	Title         string     `json:"title"`
@@ -42,7 +42,7 @@ type Device struct {
 }
 
 // CreateDevice is a function that will add a new device to the system
-func CreateDevice(deviceService DeviceService, title string, description string,  duedate *time.Time, devicedomain DeviceDomain, devicecategory string, assetid *uuid.UUID) (*Device, error) {
+func CreateDevice(deviceService DeviceService, title string, description string, devicedomain DeviceDomain, devicecategory string, assetid *uuid.UUID) (*Device, error) {
 	// add validation
 
 	err := validateDeviceTitle(title)
@@ -54,18 +54,6 @@ func CreateDevice(deviceService DeviceService, title string, description string,
 	if err != nil {
 		return &Device{}, err
 	}
-
-	/*
-	err = validateTaskDueDate(duedate)
-	if err != nil {
-		return &Device{}, err
-	}*/
-
-	/*
-	err = validateTaskPriority(priority)
-	if err != nil {
-		return &Device{}, err
-	}*/
 
 	err = validateDeviceCategory(devicecategory)
 	if err != nil {
@@ -185,7 +173,7 @@ func (t *Device) Transition(deviceService DeviceService, event interface{}) erro
 		t.Title = e.Title
 		t.UID = e.UID
 		t.Description = e.Description
-		//state.CreatedDate = e.CreatedDate
+		t.CreatedDate = e.CreatedDate
 		//state.DueDate = e.DueDate
 		//state.Priority = e.Priority
 		t.Status = e.Status
@@ -211,7 +199,7 @@ func (t *Device) Transition(deviceService DeviceService, event interface{}) erro
 	//	state.Status = TaskStatusCancelled
 	//case TaskCompleted:
 	//	state.CompletedDate = e.CompletedDate
-	//	state.Status = TaskStatusCompleted
+	//	t.Status = TaskStatusCompleted
 	//case TaskDue:
 	//	state.IsDue = true
 	}

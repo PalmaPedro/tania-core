@@ -59,11 +59,11 @@ type DeviceError struct {
 func (e DeviceError) Error() string {
 	switch e.Code {
 	case DeviceErrorTitleEmptyCode:
-		return "Task title is required."
+		return "Device title is required."
 	case DeviceErrorIDInvalidCode:
-		return "Task ID is invalid."
+		return "Device ID is invalid."
 	case DeviceErrorDescriptionEmptyCode:
-		return "Task description is required."
+		return "Device description is required."
 	//case TaskErrorDueDateEmptyCode:
 	//	return "Task due date is required."
 	//case TaskErrorDueDateInvalidCode:

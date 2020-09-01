@@ -6,7 +6,7 @@ import (
 	//"strconv"
 	"time"
 
-	"github.com/PalmaPedro/tania-core/src/helper/paginationhelper"
+	"github.com/Tanibox/tania-core/src/helper/paginationhelper"
 	"github.com/PalmaPedro/tania-core/src/devices/domain"
 	"github.com/PalmaPedro/tania-core/src/devices/query"
 	"github.com/PalmaPedro/tania-core/src/devices/storage"
@@ -28,17 +28,11 @@ type deviceReadQueryResult struct {
 	Title                string
 	Description          string
 	CreatedDate          time.Time
-	//DueDate              *time.Time
-	//CompletedDate        *time.Time
-	//CancelledDate        *time.Time
-	//Priority             string
 	Status               string
 	DomainCode           string
 	DomainDataMaterialID uuid.NullUUID
 	DomainDataAreaID     uuid.NullUUID
-	//DomainDataCropID     uuid.NullUUID
 	Category             string
-	//IsDue                int
 	AssetID              uuid.NullUUID
 }
 
@@ -264,8 +258,6 @@ func (r DeviceReadQueryMysql) populateQueryResult(rows *sql.Rows) (storage.Devic
 
 	err := rows.Scan(
 		&rowsData.UID, &rowsData.Title, &rowsData.Description, &rowsData.CreatedDate,
-		//&rowsData.DueDate, &rowsData.CompletedDate, &rowsData.CancelledDate,
-		//&rowsData.Priority, &rowsData.Status, &rowsData.DomainCode, &rowsData.DomainDataMaterialID,
 		&rowsData.DomainDataAreaID, &rowsData.Category, &rowsData.AssetID,
 	)
 
@@ -302,10 +294,6 @@ func (r DeviceReadQueryMysql) populateQueryResult(rows *sql.Rows) (storage.Devic
 	//	domainDetails = domain.DeviceDomainFinance{}
 	case domain.DeviceDomainGeneralCode:
 		domainDetails = domain.DeviceDomainGeneral{}
-	//case domain.DeviceDomainInventoryCode:
-	//	domainDetails = domain.DeviceDomainInventory{}
-	//case domain.TaskDomainReservoirCode:
-	//	domainDetails = domain.DeviceDomainReservoir{}
 	}
 
 	assetUID := &uuid.UUID{}
@@ -323,15 +311,10 @@ func (r DeviceReadQueryMysql) populateQueryResult(rows *sql.Rows) (storage.Devic
 		Title:         rowsData.Title,
 		Description:   rowsData.Description,
 		CreatedDate:   rowsData.CreatedDate,
-		//DueDate:       rowsData.DueDate,
-		//CompletedDate: rowsData.CompletedDate,
-		//CancelledDate: rowsData.CancelledDate,
-		//Priority:      rowsData.Priority,
 		Status:        rowsData.Status,
 		Domain:        rowsData.DomainCode,
 		DomainDetails: domainDetails,
 		Category:      rowsData.Category,
-		//IsDue:         isDue,
 		AssetID:       assetUID,
 	}, nil
 }

@@ -7,15 +7,17 @@ import (
 	"github.com/Tanibox/tania-core/src/tasks/repository"
 	"github.com/Tanibox/tania-core/src/tasks/storage"
 )
-
+// TaskReadRepositoryMysql is used ...
 type TaskReadRepositoryMysql struct {
 	DB *sql.DB
 }
 
+// NewTaskReadRepositoryMysql is used ...
 func NewTaskReadRepositoryMysql(s *sql.DB) repository.TaskReadRepository {
 	return &TaskReadRepositoryMysql{DB: s}
 }
 
+// Save is used ...
 func (f *TaskReadRepositoryMysql) Save(taskRead *storage.TaskRead) <-chan error {
 	result := make(chan error)
 

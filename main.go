@@ -60,8 +60,8 @@ func main() {
 
 	var db *sql.DB
 	switch *config.Config.TaniaPersistenceEngine {
-	case config.DB_SQLITE:
-		db = initSqlite()
+	//case config.DB_SQLITE:
+	//	db = initSqlite()
 	case config.DB_MYSQL:
 		db = initMysql()
 	}
@@ -317,7 +317,7 @@ func initMysql() *sql.DB {
 
 	return db
 }
-
+/*
 func initSqlite() *sql.DB {
 	if _, err := os.Stat(*config.Config.SqlitePath); os.IsNotExist(err) {
 		log.Print("Creating database file ", *config.Config.SqlitePath)
@@ -346,7 +346,7 @@ func initSqlite() *sql.DB {
 	log.Print("DDL file executed")
 
 	return db
-}
+}*/
 
 func tokenValidationWithConfig(db *sql.DB) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {

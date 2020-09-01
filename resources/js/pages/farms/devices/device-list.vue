@@ -24,10 +24,10 @@
                 )
                 i
           td
-            a(href="#")
+           // a(href="#")
               div {{ device.title }}
               MoreDetail(:data="device" :description="device.description")
-              small.text-muted(v-if="device.due_date") Due date:
+              small.text-muted(v-if="device.title") Title:
                 |
                 | {{ device.due_date | moment('timezone', 'Europe/Copenhagen').format('DD/MM/YYYY') }}
                 DeviceLabel(:type="'PRIORITY'" :device="device")
@@ -61,15 +61,14 @@
                 translate Apply
                 |
                 |
-                u(v-if="device.domain_details.material")
-                  | {{ device.domain_details.material.material_name }}
+                u(v-if="")
+                  | {{ }}
                 |
                 |
-                translate to
+                translate to               
                 |
-                |
-                span.identifier-sm(v-if="device.domain_details.crop")
-                  | {{ device.domain_details.crop.crop_batch_id }}
+                span.identifier-sm(v-if="")
+                  | {{ }}
                 |
                 |
                 translate on
@@ -91,26 +90,26 @@
                 span.identifier-sm(v-if="device.domain_details.sensor")
                   | {{ device.domain_details.sensor.sensor_name }}
                 translate on
-                //span.areatag-sm(v-if="device.domain_details.area")
+                span.areatag-sm(v-if="device.domain_details.area")
                   | {{ device.domain_details.area.area_name }}
-                //i.fas.fa-long-arrow-alt-right
-                //|  {{ device.title }}
-              //span.h4.text-dark(
-                v-else-if="device.category == 'SAFETY' || task.category == 'SANITATION'"
-              //)
-                span.areatag-sm(v-if="task.domain_details.area")
-                  | {{ task.domain_details.area.area_name }}
                 i.fas.fa-long-arrow-alt-right
-                |  {{ task.title }}
-              //span.h4.text-dark(v-else) {{ task.title }}
-              //MoreDetail(:data="task" :description="task.description")
+                |  {{ device.title }}
+              span.h4.text-dark(
+                v-else-if="device.category == 'ROBOT' || device.category == 'SENSOR'"
+              )
+                span.areatag-sm(v-if="device.domain_details.area")
+                | {{ device.domain_details.area.area_name }}
+                i.fas.fa-long-arrow-alt-right
+                |  {{ device.title }}
+              span.h4.text-dark(v-else) {{ device.title }}
+              MoreDetail(:data="device" :description="device.description")
               //div
                 small.text-muted Due date:
                   |
-                  | {{ task.due_date | moment('timezone', 'Europe/Copenhagen').format('DD/MM/YYYY') }}
-                .status.status-urgent(v-if="task.priority == 'URGENT'")
+                  | {{ device.due_date | moment('timezone', 'Europe/Copenhagen').format('DD/MM/YYYY') }}
+                .status.status-urgent(v-if="device.priority == 'URGENT'")
                   translate URGENT
-                span.text-danger(v-if="task.is_due == true")
+                span.text-danger(v-if="device.is_due == true")
                   translate Overdue!
             .col-sm-2.col-md-3.col-lg-2
               DeviceLabel(:type="'CATEGORY'" :device="device")
@@ -137,7 +136,7 @@ export default {
     Pagination,
     DeviceLabel,
   },
-  props: ['asset_id', 'category', 'domain', 'priority', 'reload', 'status'],
+  props: ['asset_id', 'category', 'domain', 'reload', 'status'],
   computed: {
     ...mapGetters({
       devices: 'getDevices',
@@ -154,9 +153,9 @@ export default {
     this.$watch('category', () => {
       this.getDevices();
     }, {});
-    this.$watch('priority', () => {
-      this.getDevices();
-    }, {});
+    //this.$watch('priority', () => {
+    //  this.getDevices();
+    //}, {});
     this.$watch('status', () => {
       this.getDevices();
     }, {});

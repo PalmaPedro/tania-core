@@ -42,7 +42,7 @@ func (f *DeviceReadRepositoryMysql) Save(deviceRead *storage.DeviceRead) <-chan 
 		}
 
 		res, err := f.DB.Exec(`UPDATE DEVICE_READ SET
-			TITLE = ?, DESCRIPTION = ?, STATUS = ?,
+			TITLE = ?, DESCRIPTION = ?, CREATED_DATE = ?, STATUS = ?,
 			DOMAIN_CODE = ?, DOMAIN_DATA_MATERIAL_ID = ?, DOMAIN_DATA_AREA_ID = ?,
 			CATEGORY = ?, ASSET_ID = ?
 			WHERE UID = ?`,

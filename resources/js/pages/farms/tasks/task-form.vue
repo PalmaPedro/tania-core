@@ -12,6 +12,7 @@
         span.areatag {{ data.name }}
       h4.font-bold(v-else)
         translate Add New Task
+    
     .modal-body
       b-form(@submit.prevent="validateBeforeSubmit")
         .form-row
@@ -63,6 +64,34 @@
                   translate No
               span.help-block.text-danger(v-show="errors.has('priority')")
                 | {{ errors.first('priority') }}
+        
+        // Select a device for the task
+        // TODO: allow user to select from the list of added devices
+        .form-group
+          label#label-category(for="category")
+            translate Assign a device
+          select.form-control#category(
+            v-validate="'required'"
+            :class="{'input': true, 'text-danger': errors.has('category') }"
+            v-model="task.category"
+            name="category"
+          )
+            option(value="")
+              translate Please select category
+            //option(v-if="asset_name == 'AREA'" value="AREA")
+              translate Area
+            //option(v-if="asset_name == 'RESERVOIR'" value="RESERVOIR")
+              translate Reservoir
+            //option(v-if="asset_name == 'GENERAL'" value="GENERAL")
+              translate 
+            option(v-for="category in options.taskCategories" :value="category.key")
+              | {{ category.label }}
+            //option(v-if="asset_name == 'GENERAL'" value="INVENTORY")
+              translate Inventory
+          span.help-block.text-danger(v-show="errors.has('category')")
+            | {{ errors.first('category') }}
+
+        // Select category for the task
         .form-group
           label#label-category(for="category")
             translate Task Category
@@ -79,13 +108,15 @@
             option(v-if="asset_name == 'RESERVOIR'" value="RESERVOIR")
               translate Reservoir
             option(v-if="asset_name == 'GENERAL'" value="GENERAL")
-              translate Select_to_test
+              translate select_task
             //option(v-for="category in options.taskCategories" :value="category.key")
               | {{ category.label }}
             //option(v-if="asset_name == 'GENERAL'" value="INVENTORY")
               translate Inventory
           span.help-block.text-danger(v-show="errors.has('category')")
             | {{ errors.first('category') }}
+
+        // Add a title to the task
         .form-group
           label#label-title(for="title")
             translate Title
@@ -97,6 +128,8 @@
             name="title"
           )
           span.help-block.text-danger(v-show="errors.has('title')") {{ errors.first('title') }}
+        
+        // Add a description to the task
         .form-group
           label#label-description(for="description")
             translate Description
@@ -118,7 +151,9 @@
 import { mapActions } from 'vuex';
 import Datepicker from 'vuejs-datepicker';
 import { StubTask } from '../../../stores/stubs';
+import {StubDevice } from '../../../stores/stubs';
 import { TaskDomainCategories } from '../../../stores/helpers/farms/task';
+import { DeviceDomainCategories } from '../../../stores/helpers/farms/device';
 import BtnCancel from '../../../components/common/btn-cancel.vue';
 import BtnSave from '../../../components/common/btn-save.vue';
 
